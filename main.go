@@ -28,6 +28,9 @@ func init() {
 func main() {
 	utl.CreateFolder(app.DataPath)
 	app.Process = utl.PathJoin(app.AppPath, "Rambox.exe")
+	app.Args = []string{
+		"--without-update",
+	}
 
 	configPath := path.Join(app.DataPath, "config.json")
 	if _, err := os.Stat(configPath); err == nil {
