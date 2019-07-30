@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.6.9-2 (2019/07/24)
+## 0.6.9-3 (2019/07/24)
 
 * Disable automatic update
 
