@@ -32,7 +32,7 @@
     </if>
     <delete dir="${extract.path}"/>
     <move todir="${extract.path}">
-      <fileset dir="${extract.path2}"/>
+      <fileset dir="${extract.path2}" defaultexcludes="no"/>
     </move>
 
     <setelectronuserdata path="${extract.path}"
