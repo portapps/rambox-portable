@@ -16,7 +16,7 @@
   <!-- Targets -->
   <target name="release" depends="release.app" description="Release"/>
 
-  <target name="prepare" depends="load.lib.asar">
+  <target name="prepare">
     <echo message="Preparing release..."/>
 
     <echo message="Extracting embedded ${atf.arch} archive"/>
@@ -30,16 +30,11 @@
         <sevenzip-ax src="${extract.path}\$PLUGINSDIR\app-64.7z" dest="${extract.path2}"/>
       </else>
     </if>
+
     <delete dir="${extract.path}"/>
     <move todir="${extract.path}">
       <fileset dir="${extract.path2}" defaultexcludes="no"/>
     </move>
-
-    <setelectronuserdata path="${extract.path}"
-      file="${electron.userdata.file}"
-      search="${electron.userdata.search}"
-      replace="${electron.userdata.replace}"
-    />
   </target>
 
 </project>

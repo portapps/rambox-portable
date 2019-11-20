@@ -29,6 +29,7 @@ func main() {
 	utl.CreateFolder(app.DataPath)
 	app.Process = utl.PathJoin(app.AppPath, "Rambox.exe")
 	app.Args = []string{
+		"--user-data-dir=" + app.DataPath,
 		"--without-update",
 	}
 
