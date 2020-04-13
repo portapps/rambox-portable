@@ -8,8 +8,9 @@ import (
 	"os"
 	"path"
 
-	. "github.com/portapps/portapps"
-	"github.com/portapps/portapps/pkg/utl"
+	"github.com/portapps/portapps/v2"
+	"github.com/portapps/portapps/v2/pkg/log"
+	"github.com/portapps/portapps/v2/pkg/utl"
 )
 
 type config struct {
@@ -17,7 +18,7 @@ type config struct {
 }
 
 var (
-	app *App
+	app *portapps.App
 	cfg *config
 )
 
@@ -30,8 +31,8 @@ func init() {
 	}
 
 	// Init app
-	if app, err = NewWithCfg("rambox-portable", "Rambox", cfg); err != nil {
-		Log.Fatal().Err(err).Msg("Cannot initialize application. See log file for more info.")
+	if app, err = portapps.NewWithCfg("rambox-portable", "Rambox", cfg); err != nil {
+		log.Fatal().Err(err).Msg("Cannot initialize application. See log file for more info.")
 	}
 }
 
@@ -58,18 +59,18 @@ func main() {
 		if err == nil {
 			jsonMapSettings := make(map[string]interface{})
 			json.Unmarshal(rawSettings, &jsonMapSettings)
-			Log.Info().Msgf("Current config: %s", jsonMapSettings)
+			log.Info().Msgf("Current config: %s", jsonMapSettings)
 
 			jsonMapSettings["auto_launch"] = false
-			Log.Info().Msgf("New config: %s", jsonMapSettings)
+			log.Info().Msgf("New config: %s", jsonMapSettings)
 
 			jsonSettings, err := json.Marshal(jsonMapSettings)
 			if err != nil {
-				Log.Error().Err(err).Msg("Update config marshal")
+				log.Error().Err(err).Msg("Update config marshal")
 			}
 			err = ioutil.WriteFile(configPath, jsonSettings, 0644)
 			if err != nil {
-				Log.Error().Err(err).Msg("Write config")
+				log.Error().Err(err).Msg("Write config")
 			}
 		}
 	}
