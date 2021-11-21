@@ -4,7 +4,6 @@ package main
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"os"
 	"path"
 
@@ -55,7 +54,7 @@ func main() {
 
 	configPath := path.Join(app.DataPath, "config.json")
 	if _, err := os.Stat(configPath); err == nil {
-		rawSettings, err := ioutil.ReadFile(configPath)
+		rawSettings, err := os.ReadFile(configPath)
 		if err == nil {
 			jsonMapSettings := make(map[string]interface{})
 			json.Unmarshal(rawSettings, &jsonMapSettings)
@@ -68,7 +67,7 @@ func main() {
 			if err != nil {
 				log.Error().Err(err).Msg("Update config marshal")
 			}
-			err = ioutil.WriteFile(configPath, jsonSettings, 0644)
+			err = os.WriteFile(configPath, jsonSettings, 0644)
 			if err != nil {
 				log.Error().Err(err).Msg("Write config")
 			}
